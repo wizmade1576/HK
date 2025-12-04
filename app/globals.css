@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-mint: #34d1bf;
+  --brand-navy: #052a49;
+  --brand-gold: #f7c800;
+  --text-dark: #4b5563;
+  --text-muted: #9ba5b4;
+  --bg-surface: #f9fafb;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: "Pretendard", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-surface);
+  color: var(--text-dark);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background-color: rgba(52, 209, 191, 0.3);
+}
+
+.map-price-marker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -130%);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.map-price-marker-active {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #111827 !important;
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -140%) scale(1.05);
 }
