@@ -25,7 +25,7 @@ export default function HomePage() {
               한국의 감성, 세계의 여행을 위한 새로운 기준
             </h1>
             <p className="text-lg text-white/90 sm:text-xl">
-              단기 머무름부터 월세 생활까지, 검증된 파트너가 제안하는 숙소만 모았습니다. 지금 여행을 계획하고 이상적인 공간을 발견해보세요.
+              2주 단위부터 월세 생활까지, 검증된 파트너가 제안하는 숙소만 모았습니다. 지금 여행을 계획하고 이상적인 공간을 발견해보세요.
             </p>
             <div className="flex flex-col gap-3 rounded-full border border-white/60 bg-white/20 p-3 backdrop-blur transition sm:flex-row sm:items-center">
               <input
