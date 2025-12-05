@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, Star } from "lucide-react";
@@ -22,7 +20,7 @@ export default function RoomCard({ room }: RoomCardProps) {
   return (
     <Link
       href={`/rooms/${room.id}`}
-      className="group flex h-full min-w-[260px] flex-1 cursor-pointer flex-col overflow-hidden rounded-3xl bg-white shadow-sm transition duration-300 hover:shadow-xl"
+      className="group flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-3xl bg-white shadow-sm transition duration-300 hover:shadow-xl"
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
