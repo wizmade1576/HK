@@ -1,5 +1,7 @@
 "use client";
 
+/// <reference types="google.maps" />
+
 import { useEffect, useRef, useState } from "react";
 
 export type MapListing = {
@@ -26,10 +28,10 @@ type Props = {
 
 declare global {
   interface Window {
-    initMap?: () => void;
-    google?: typeof google;
+      initMap?: () => void;
+      google?: typeof globalThis.google;
+    }
   }
-}
 
 const loadGoogleMap = (apiKey: string, callbackName = "initMap") => {
   if (document.getElementById("gmaps")) return;

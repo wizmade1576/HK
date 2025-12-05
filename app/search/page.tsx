@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { Suspense, useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 import RoomCard from "@/components/RoomCard";
@@ -28,7 +28,7 @@ const DEFAULT_FILTERS = {
   flexibleDates: false,
 };
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams();
   const cityQuery = searchParams.get("city") ?? "";
   const checkIn = searchParams.get("checkIn") ?? "";
@@ -67,7 +67,9 @@ export default function SearchPage() {
         )
       ) return false;
 
-      if (room.beds < filterValues.beds) return false;
+      const bedsCount = room.beds ?? 0;
+
+      if (bedsCount < filterValues.beds) return false;
       if (room.rooms < filterValues.bedrooms) return false;
       if (room.bathrooms < filterValues.bathrooms) return false;
 
@@ -208,5 +210,13 @@ export default function SearchPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={null}>
+      <SearchPageContent />
+    </Suspense>
   );
 }
