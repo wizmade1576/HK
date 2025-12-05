@@ -14,7 +14,7 @@ import GoogleMap, {
 
 import { MOCK_ROOMS, type Room } from "@/lib/mock-data";
 
-// Airbnb 스타일 필터 기본값
+// Airbnb 기본 필터 값
 const DEFAULT_FILTERS = {
   placeTypes: [] as string[],
   depositMin: 0,
@@ -39,12 +39,12 @@ function SearchPageContent() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [filterValues, setFilterValues] = useState(DEFAULT_FILTERS);
 
-  // 지도 상태
+  // 지도 관련 상태
   const [activeRoomId, setActiveRoomId] = useState<string | null>(null);
   const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number } | null>(null);
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null);
 
-  // 1) 필터 적용된 전체 방 목록
+  // 1) 필터 적용된 매물
   const filteredRooms = useMemo(() => {
     return MOCK_ROOMS.filter((room) => {
       if (cityQuery && room.city !== cityQuery) return false;
@@ -60,16 +60,20 @@ function SearchPageContent() {
       if (room.weeklyPrice < filterValues.weeklyMin) return false;
       if (room.weeklyPrice > filterValues.weeklyMax) return false;
 
+      // 옵션 필터
       if (
         filterValues.amenities.length &&
         !filterValues.amenities.every(
           (a) => room.options[a as keyof typeof room.options],
         )
-      ) return false;
+      ) {
+        return false;
+      }
 
+      // beds undefined 대비
       const bedsCount = room.beds ?? 0;
-
       if (bedsCount < filterValues.beds) return false;
+
       if (room.rooms < filterValues.bedrooms) return false;
       if (room.bathrooms < filterValues.bathrooms) return false;
 
@@ -77,13 +81,16 @@ function SearchPageContent() {
     });
   }, [cityQuery, filterValues]);
 
-  // 2) 지도 범위 안의 매물만 표시
+  // 2) 지도 범위 내 + 이미지 있는 방
   const displayRooms = useMemo(
     () =>
       filteredRooms.filter(
-        (room) => room.images.length > 0 && room.lat !== undefined && room.lng !== undefined,
+        (room) =>
+          room.images.length > 0 &&
+          room.lat !== undefined &&
+          room.lng !== undefined
       ),
-    [filteredRooms],
+    [filteredRooms]
   );
 
   // 3) 지도 마커 데이터
@@ -95,10 +102,10 @@ function SearchPageContent() {
         lng: r.lng!,
         price: r.weeklyPrice ?? 0,
       })),
-    [displayRooms],
+    [displayRooms]
   );
 
-  // 4) 초기 지도 위치 설정
+  // 4) 초기 맵 위치
   useEffect(() => {
     if (!mapCenter && displayRooms.length > 0) {
       setMapCenter({
@@ -121,21 +128,19 @@ function SearchPageContent() {
         onApply={() => setFiltersOpen(false)}
       />
 
-      {/* 상단 필터 버튼 */}
+      {/* 필터 버튼 */}
       <div className="mb-6 flex justify-end">
         <FiltersButton onClick={() => setFiltersOpen(true)} />
       </div>
 
-      {/* 본문: 리스트 + 지도 */}
+      {/* 메인 콘텐츠: 리스트 + 지도 */}
       <div className="flex w-full gap-6">
 
-        {/* ---------------- LEFT LIST ---------------- */}
+        {/* LEFT LIST */}
         <div className="flex-1 min-w-[480px] space-y-5">
-          {/* 현재 필터 영역 */}
+          {/* 검색 조건 요약 */}
           <div className="rounded-3xl border bg-white p-6 shadow-sm">
-            <p className="text-xs uppercase tracking-widest text-gray-500">
-              검색 조건
-            </p>
+            <p className="text-xs uppercase tracking-widest text-gray-500">검색 조건</p>
 
             <div className="mt-2 flex flex-wrap items-center gap-3 text-[15px]">
               <span className="rounded-full bg-red-100 px-3 py-1 text-red-500">
@@ -187,14 +192,14 @@ function SearchPageContent() {
               </div>
             ) : (
               <div className="mt-4 rounded-3xl border bg-gray-100 p-6 text-center text-sm text-gray-500">
-                조건에 맞는 매물이 없습니다.
+                조건에 맞는 매물이 없습니다.  
                 지도를 움직이거나 필터를 조정해보세요.
               </div>
             )}
           </div>
         </div>
 
-        {/* ---------------- RIGHT MAP ---------------- */}
+        {/* RIGHT MAP */}
         <div className="flex-1 min-w-[500px] sticky top-20 hidden h-[94vh] overflow-hidden rounded-3xl border lg:block">
           <GoogleMap
             listings={mapListings}
