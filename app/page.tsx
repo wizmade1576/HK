@@ -83,9 +83,15 @@ export default function HomePage() {
   return (
     <>
       {showMemo && (
+<<<<<<< Updated upstream
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 px-4 py-6">
           <div className="max-w-3xl w-full rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl shadow-black/30">
             <div className="flex items-start justify-between gap-4">
+=======
+        <div className="fixed inset-0 z-[60] flex items-start justify-center bg-black/60 px-4 py-6">
+          <div className="flex max-w-3xl w-full max-h-[calc(100vh-3rem)] flex-col rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-black/30">
+            <div className="flex items-start justify-between gap-4 border-b border-slate-100 bg-white/95 px-6 py-4">
+>>>>>>> Stashed changes
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#FF385C]">
                   HK Memo
@@ -102,34 +108,42 @@ export default function HomePage() {
                 닫기
               </button>
             </div>
-            <div className="mt-6 grid gap-5 md:grid-cols-2">
-              {memoSections.map((section) => (
-                <div
-                  key={section.title}
-                  className="space-y-2 rounded-2xl border border-slate-100 bg-slate-50/60 p-4"
-                >
-                  <h4 className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
-                    {section.title}
-                  </h4>
-                  <ul className="space-y-1 text-sm text-slate-700">
-                    {section.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-0.5 inline-flex h-2 w-2 flex-none rounded-full bg-[#FF385C]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            <div className="flex-1 overflow-y-auto px-6 pb-6">
+              <div className="mt-4 grid gap-5 md:grid-cols-2">
+                {memoSections.map((section) => (
+                  <div
+                    key={section.title}
+                    className="space-y-2 rounded-2xl border border-slate-100 bg-slate-50/60 p-4"
+                  >
+                    <h4 className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
+                      {section.title}
+                    </h4>
+                    <ul className="space-y-1 text-sm text-slate-700">
+                      {section.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2">
+                          <span className="mt-0.5 inline-flex h-2 w-2 flex-none rounded-full bg-[#FF385C]" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       )}
 
       {showPlan && (
+<<<<<<< Updated upstream
         <div className="fixed inset-0 z-[65] flex items-center justify-center bg-black/60 px-4 py-6">
           <div className="max-w-3xl w-full space-y-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl shadow-black/40">
             <div className="flex items-start justify-between gap-4">
+=======
+        <div className="fixed inset-0 z-[65] flex items-start justify-center bg-black/60 px-4 py-6">
+          <div className="flex max-w-3xl w-full max-h-[calc(100vh-3rem)] flex-col rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-black/40">
+            <div className="flex items-start justify-between gap-4 border-b border-slate-100 bg-white/95 px-6 py-4">
+>>>>>>> Stashed changes
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#FF385C]">
                   HK Plan
@@ -146,28 +160,30 @@ export default function HomePage() {
                 닫기
               </button>
             </div>
-            <div className="grid gap-5 md:grid-cols-2">
-              {planSections.map((section) => (
-                <div
-                  key={section.title}
-                  className="space-y-2 rounded-2xl border border-slate-100 bg-slate-50/60 p-4"
-                >
-                  <h4 className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
-                    {section.title}
-                  </h4>
-                  <ul className="space-y-1 text-sm text-slate-700">
-                    {section.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-0.5 inline-flex h-2 w-2 flex-none rounded-full bg-[#FF385C]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            <div className="rounded-2xl border border-dashed border-[#FF385C]/80 bg-[#FF385C]/10 px-4 py-3 text-sm font-semibold text-[#052A49] uppercase tracking-[0.3em]">
-              {completionDate}
+            <div className="flex-1 overflow-y-auto px-6 pb-6">
+              <div className="mt-4 grid gap-5 md:grid-cols-2">
+                {planSections.map((section) => (
+                  <div
+                    key={section.title}
+                    className="space-y-2 rounded-2xl border border-slate-100 bg-slate-50/60 p-4"
+                  >
+                    <h4 className="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
+                      {section.title}
+                    </h4>
+                    <ul className="space-y-1 text-sm text-slate-700">
+                      {section.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2">
+                          <span className="mt-0.5 inline-flex h-2 w-2 flex-none rounded-full bg-[#FF385C]" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 rounded-2xl border border-dashed border-[#FF385C]/80 bg-[#FF385C]/10 px-4 py-3 text-sm font-semibold text-[#052A49] uppercase tracking-[0.3em]">
+                {completionDate}
+              </div>
             </div>
           </div>
         </div>
